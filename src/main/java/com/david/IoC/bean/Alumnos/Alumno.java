@@ -1,4 +1,4 @@
-package com.david.IoC.bean.Profesores;
+package com.david.IoC.bean.Alumnos;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -6,22 +6,21 @@ import org.springframework.stereotype.Component;
 import com.david.IoC.Almacenamiento;
 
 @Component
-public class ProfesorBean implements Almacenamiento {
+public class Alumno implements Almacenamiento{
 
-	@Qualifier("profesor")
+	@Qualifier("alumno")
 	
 	@Override
 	public String getPath() {
-
-		return "/ficheros/profesor";
+		
+		return "/ficheros/alumno";
 	}
 
 	@Override
 	public double getCapacidad() {
 
-		return 2;
+		return 0.1;
 	}
 
-
-		
+	
 }

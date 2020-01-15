@@ -7,27 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.david.IoC.bean.Alumnos.AlumnoBean;
 import com.david.IoC.bean.Profesores.ProfesorBean;
-import com.david.IoC.servicios.ComponenteClases;
 
 @Controller
 public class Rutas {
 
-	@Autowired
-	AlumnoBean pedro;
-	
-	@Autowired
-	@Qualifier("pedro")
-	AlumnoBean maria;
-	
-	@Autowired
-	ProfesorBean alba;
-	
-	@Autowired
-	@Qualifier("alba")
-	ProfesorBean andres;
-	
-	/*@Autowired
-	ComponenteClases asignaturas;*/
+
 	
 	
 	@GetMapping("/")
@@ -49,11 +33,6 @@ public class Rutas {
 		salidaProfesores += andres.toString();
 		
 		return  "*******Alumnos*******" + "<br>" + salidaAlumnos + "<br>" + "*******Profesores*******" + "<br>" + salidaProfesores;
-		/*String mostrar = "";
-		for(String str:asignaturas.getAsignatura()) {
-			
-			mostrar += str + "<br>";
-		}*/
 	}
 	
 	
