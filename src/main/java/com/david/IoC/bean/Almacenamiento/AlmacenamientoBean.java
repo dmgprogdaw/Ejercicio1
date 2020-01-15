@@ -17,4 +17,10 @@ public class AlmacenamientoBean {
 	public void setCapacidad(float capacidad) {
 		this.capacidad = capacidad;
 	}
+	
+	@Override
+	public String toString() {
+		return "AlmacenamientoBean [path=" + path + ", capacidad=" + capacidad + "]";
+	}
+	
 }

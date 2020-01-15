@@ -1,25 +1,22 @@
-package com.david.IoC.bean.Alumnos;
+package com.david.IoC.servicios.Almacenamiento;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.david.IoC.Almacenamiento;
-
 @Component
+@Qualifier("alumno")
 public class Alumno implements Almacenamiento{
-
-	@Qualifier("alumno")
 	
 	@Override
-	public String getPath() {
+	public String getRuta() {
 		
 		return "/ficheros/alumno";
 	}
 
 	@Override
-	public double getCapacidad() {
+	public float getCapacidad() {
 
-		return 0.1;
+		return 0.1f;
 	}
 
 	

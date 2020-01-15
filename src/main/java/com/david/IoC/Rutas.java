@@ -5,34 +5,25 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.david.IoC.bean.Alumnos.AlumnoBean;
-import com.david.IoC.bean.Profesores.ProfesorBean;
+import com.david.IoC.servicios.Almacenamiento.Almacenamiento;
 
 @Controller
 public class Rutas {
 
-
+	@Autowired
+	@Qualifier("alumno")
+	Almacenamiento alumno;
+	
+	@Autowired
+	@Qualifier("profesor")
+	Almacenamiento profesor;
 	
 	
 	@GetMapping("/")
 	@ResponseBody
 	public String rutaInicial() {
 		
-		
-		String salidaAlumnos = "";
-		String salidaProfesores = "";
-		
-		salidaAlumnos  += pedro.toString() + "<br>";
-		maria.setNombre("Maria");
-		maria.setCurso("2º Bachillerato");
-		salidaAlumnos  += maria.toString();
-		
-		salidaProfesores += alba.toString() +"<br>";
-		andres.setNombre("Andres");
-		andres.setAsignatura("Lengua");		
-		salidaProfesores += andres.toString();
-		
-		return  "*******Alumnos*******" + "<br>" + salidaAlumnos + "<br>" + "*******Profesores*******" + "<br>" + salidaProfesores;
+		return null;
 	}
 	
 	
@@ -40,32 +31,31 @@ public class Rutas {
 	@ResponseBody
 	public String rutaProfesores() {
 		
-		String lista = "<ol>";
-		lista += "<li>" + alba.toString() + "</li>";
-		
-		andres.setNombre("Andres");
-		andres.setAsignatura("Lengua");
-		
-		lista += "<li>" + andres.toString() + "</li>" + "</ol>";
-
-		
-		return lista;
+		return profesor.getRuta() + " " + profesor.getCapacidad();
 	}
 	
 	
 	@GetMapping("/ficheros/alumnos")
 	@ResponseBody
 	public String rutaAlumnos() {
-				
-		String lista = "<ol>";
-		lista += "<li>" + pedro.toString() + "</li>"; 
 		
-		maria.setNombre("Maria");
-		maria.setCurso("2º Bachillerato");
+		return alumno.getRuta() + " " + alumno.getCapacidad();
+	}
+	
+	@GetMapping("/precio/francia/{cantidad")
+	@ResponseBody
+	public String rutaFrancia() {
 		
-		lista += "<li>" + maria.toString() + "</li>" + "</ol>";
-			
-		return lista;
+
+		return null;
+	}
+	
+	@GetMapping("/precio/espania/{cantidad")
+	@ResponseBody
+	public String rutaEspania() {
+		
+
+		return null;
 	}
 }
 
