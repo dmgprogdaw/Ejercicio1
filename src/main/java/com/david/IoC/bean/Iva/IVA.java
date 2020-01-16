@@ -17,6 +17,9 @@ public class IVA {
 	public void setIva(float iva) {
 		this.iva = iva;
 	}
-
 	
+	@Override
+	public String toString() {
+		return "IVA [ruta=" + ruta + ", iva=" + iva + "]";
+	}	
 }

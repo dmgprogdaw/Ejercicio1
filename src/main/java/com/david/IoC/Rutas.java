@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.david.IoC.servicios.Almacenamiento.Almacenamiento;
+import com.david.IoC.servicios.IVA.InterfazIVA;
+import com.david.IoC.servicios.IVA.Operaciones;
 
 @Controller
 public class Rutas {
@@ -17,6 +20,14 @@ public class Rutas {
 	@Autowired
 	@Qualifier("profesor")
 	Almacenamiento profesor;
+	
+	@Autowired
+	@Qualifier("francia")
+	InterfazIVA francia;
+	
+	@Autowired
+	@Qualifier("espania")
+	InterfazIVA espania;
 	
 	
 	@GetMapping("/")
@@ -44,17 +55,33 @@ public class Rutas {
 	
 	@GetMapping("/precio/francia/{cantidad")
 	@ResponseBody
-	public String rutaFrancia() {
+	public String rutaFrancia(@PathVariable float cantidad) {
 		
-
+		float precioFinal = 0;
+		float precioIVA = 0;
+		
+		precioIVA = Operaciones.sacarIva(cantidad, francia.getIva());
+		
+		precioFinal = cantidad + precioIVA;
+		
+		System.out.println("El precio final es " + precioFinal);
+		
 		return null;
 	}
 	
 	@GetMapping("/precio/espania/{cantidad")
 	@ResponseBody
-	public String rutaEspania() {
+	public String rutaEspania(@PathVariable float cantidad) {
 		
-
+		float precioFinal = 0;
+		float precioIVA = 0;
+		
+		precioIVA = Operaciones.sacarIva(cantidad, espania.getIva());
+		
+		precioFinal = cantidad + precioIVA;
+		
+		System.out.println("El precio final es " + precioFinal);
+		
 		return null;
 	}
 }
