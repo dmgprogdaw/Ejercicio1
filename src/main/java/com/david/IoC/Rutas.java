@@ -6,9 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.david.IoC.Iva.Servicios.InterfazIVA;
+import com.david.IoC.Iva.Servicios.ServicioIva;
 import com.david.IoC.servicios.Almacenamiento.Almacenamiento;
-import com.david.IoC.servicios.IVA.InterfazIVA;
-import com.david.IoC.servicios.IVA.Operaciones;
 
 @Controller
 public class Rutas {
@@ -28,6 +29,10 @@ public class Rutas {
 	@Autowired
 	@Qualifier("espania")
 	InterfazIVA espania;
+	
+	@Autowired
+	@Qualifier("iva")
+	ServicioIva servicioIva;
 	
 	
 	@GetMapping("/")
@@ -53,36 +58,42 @@ public class Rutas {
 		return alumno.getRuta() + " " + alumno.getCapacidad();
 	}
 	
-	@GetMapping("/precio/francia/{cantidad")
+	@GetMapping("/precio/francia/{cantidad}")
 	@ResponseBody
 	public String rutaFrancia(@PathVariable float cantidad) {
 		
 		float precioFinal = 0;
 		float precioIVA = 0;
+		String resultado;
 		
-		precioIVA = Operaciones.sacarIva(cantidad, francia.getIva());
+		precioIVA = servicioIva.calcularIVA(cantidad, francia.getIva());
 		
 		precioFinal = cantidad + precioIVA;
 		
-		System.out.println("El precio final es " + precioFinal);
 		
-		return null;
+		return resultado = "El precio original era: " + cantidad + "<br>" + 
+						   "El porcentaje de IVA es: " + francia.getIva() + "<br>" + 
+						   "El IVA es: " + precioIVA + "<br>" + 
+						   "El precio final es: " + precioFinal;
 	}
 	
-	@GetMapping("/precio/espania/{cantidad")
+	@GetMapping("/precio/espania/{cantidad}")
 	@ResponseBody
 	public String rutaEspania(@PathVariable float cantidad) {
 		
 		float precioFinal = 0;
 		float precioIVA = 0;
+		String resultado;
 		
-		precioIVA = Operaciones.sacarIva(cantidad, espania.getIva());
+		precioIVA = servicioIva.calcularIVA(cantidad, espania.getIva());
 		
 		precioFinal = cantidad + precioIVA;
+			
 		
-		System.out.println("El precio final es " + precioFinal);
-		
-		return null;
+		return resultado = "El precio original era: " + cantidad + "<br>" + 
+				   		   "El porcentaje de IVA es: " + espania.getIva() + "<br>" + 
+				   		   "El IVA es: " + precioIVA + "<br>" + 
+				   		   "El precio final es: " + precioFinal;
 	}
 }
 
